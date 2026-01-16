@@ -9,7 +9,6 @@ public class Main {
         String archivo = "codigos_postales_hmo.csv";
         String separador = ",";
 
-        // ArrayLists
         ArrayList<String> codigosPostales = new ArrayList<>();
         ArrayList<Integer> conteos = new ArrayList<>();
 
@@ -17,7 +16,7 @@ public class Main {
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
 
-            // Saltar encabezados
+            // Saltamos el encabezado
             br.readLine();
 
             while ((linea = br.readLine()) != null) {
@@ -25,14 +24,14 @@ public class Main {
                 String[] datos = linea.split(separador);
                 String codigoPostal = datos[0];
 
-                // Verificar si el código ya existe
+                // Analizamos si existe un codigo y lo verificamos
                 int indice = codigosPostales.indexOf(codigoPostal);
 
                 if (indice != -1) {
-                    // Ya existe → aumentar conteo
+                    // Si existe el mismo numero este tiende a aumentar conteo
                     conteos.set(indice, conteos.get(indice) + 1);
                 } else {
-                    // No existe → agregar
+                    // Si no existe, lo agregamos como nuevo
                     codigosPostales.add(codigoPostal);
                     conteos.add(1);
                 }
@@ -44,11 +43,10 @@ public class Main {
 
         // Mostrar resultados
         System.out.println("Resultados del análisis:\n");
+        System.out.println("---------------------------------------------------------");
 
         for (int i = 0; i < codigosPostales.size(); i++) {
-            System.out.println(
-                    "Código postal: " + codigosPostales.get(i) +
-                            " - Número de asentamientos: " + conteos.get(i)
+            System.out.println("Código postal: " + codigosPostales.get(i) + " - Número de asentamientos: " + conteos.get(i)
             );
         }
     }
